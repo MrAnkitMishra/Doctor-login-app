@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Dashboard</title>
+</head>
+<body>
+<h2>Welcome, {{ profile.user.first_name }} (Patient)</h2>
+<p>Email: {{ profile.user.email }}</p>
+<p>Address: {{ profile.address_line1 }}, {{ profile.city }}, {{ profile.state }} - {{ profile.pincode }}</p>
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
