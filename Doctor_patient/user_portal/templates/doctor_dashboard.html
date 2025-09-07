@@ -1,12 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-<h2>Welcome, Dr. {{ profile.user.first_name }} (Doctor)</h2>
-<p>Email: {{ profile.user.email }}</p>
-<p>Address: {{ profile.address_line1 }}, {{ profile.city }}, {{ profile.state }} - {{ profile.pincode }}</p>
-<a href="{% url 'logout' %}">Logout</a>
+    <h1>Welcome Dr. {{ user.first_name }} {{ user.last_name }}</h1>
+    <p>You are logged in as <strong>Doctor</strong>.</p>
+
+    <h3>Blog Options</h3>
+    <ul>
+        <li><a href="{% url 'blog_create' %}">✍️ Create a New Blog</a></li>
+        <li><a href="{% url 'my_blogs' %}">📑 View My Blogs</a></li>
+    </ul>
+
+    <p><a href="{% url 'logout' %}">Logout</a></p>
 </body>
 </html>

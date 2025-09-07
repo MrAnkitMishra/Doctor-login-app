@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blogs</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>
+        {% if category %}Blogs in {{ category }}{% else %}All Blogs{% endif %}
+    </h1>
+    <ul>
+        {% for blog in blogs %}
+            <li>
+                <img src="{{ blog.image.url }}" width="120" height="80">
+                <strong>{{ blog.title }}</strong> ({{ blog.category }}) <br>
+                {{ blog.short_summary }}
+            </li>
+        {% empty %}
+            <p>No blogs found in this category.</p>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'patient_dashboard' %}">⬅ Back to Dashboard</a></p>
+</body>
+</html>

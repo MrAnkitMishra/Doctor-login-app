@@ -13,7 +13,7 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+
 from django.contrib import admin
 from django.urls import path
 from accounts import views
@@ -30,5 +30,62 @@ urlpatterns = [
     path("dashboard/doctor/", views.doctor_dashboard, name="doctor_dashboard"),
 ]
 
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)"""
+
+'''from django.contrib import admin
+from django.urls import path
+from accounts import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    # Authentication
+    path('', views.login_view, name="login"),  # default root = login
+    path('signup/', views.signup_view, name="signup"),
+    path('login/', views.login_view, name="login"),
+    path('logout/', views.logout_view, name="logout"),
+    
+    # Blog
+    path(route='blogs/', view=include("blog.urls")),
+
+    # Dashboards
+    path('dashboard/patient/', views.patient_dashboard, name="patient_dashboard"),
+    path('dashboard/doctor/', views.doctor_dashboard, name="doctor_dashboard"),
+]
+
+# Static + Media in debug
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)'''
+
+from django.contrib import admin
+from django.urls import path, include
+from accounts import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    # Authentication
+    path('', views.login_view, name="login"),  # default root = login
+    path('signup/', views.signup_view, name="signup"),
+    path('login/', views.login_view, name="login"),
+    path('logout/', views.logout_view, name="logout"),
+
+    # Blog
+    path('blogs/', include("blog.urls")),
+
+    # Dashboards
+    path('dashboard/patient/', views.patient_dashboard, name="patient_dashboard"),
+    path('dashboard/doctor/', views.doctor_dashboard, name="doctor_dashboard"),
+]
+
+# Media setup
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -73,12 +76,37 @@ WSGI_APPLICATION = 'user_portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}'''
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "doctor_patient_db",  # your DB name
+        "USER": "root",
+        "PASSWORD": "Password@1",  # replace with your real password
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
+        "OPTIONS": {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
 }
+
+
+
+# Static files (CSS/JS)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]   # your static folder
+STATIC_ROOT = BASE_DIR / "staticfiles"     # for collectstatic
+
+# Media files (uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Password validation

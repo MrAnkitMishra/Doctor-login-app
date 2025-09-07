@@ -1,12 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-<h2>Welcome, {{ profile.user.first_name }} (Patient)</h2>
-<p>Email: {{ profile.user.email }}</p>
-<p>Address: {{ profile.address_line1 }}, {{ profile.city }}, {{ profile.state }} - {{ profile.pincode }}</p>
-<a href="{% url 'logout' %}">Logout</a>
+    <h1>Hello {{ user.first_name }} {{ user.last_name }}</h1>
+    <p>You are logged in as <strong>Patient</strong>.</p>
+
+    <h3>Explore Blogs by Category</h3>
+    <ul>
+        <li><a href="{% url 'blog_list' %}?category=Mental Health">🧠 Mental Health</a></li>
+        <li><a href="{% url 'blog_list' %}?category=Heart Disease">❤️ Heart Disease</a></li>
+        <li><a href="{% url 'blog_list' %}?category=Covid19">🦠 Covid19</a></li>
+        <li><a href="{% url 'blog_list' %}?category=Immunization">💉 Immunization</a></li>
+        <li><a href="{% url 'blog_list' %}">📚 All Blogs</a></li>
+    </ul>
+
+    <p><a href="{% url 'logout' %}">Logout</a></p>
 </body>
 </html>
